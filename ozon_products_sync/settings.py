@@ -1,12 +1,20 @@
 from pathlib import Path
+import environ
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-SECRET_KEY = 'django-insecure-51@b-*$qj^z-2k+9ikbu0p%b4cry%8_7vl_jt%31l@)+)m-bpo'
 
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+SECRET_KEY = env("SECRET_KEY")
+
+OZON_API_KEY = env("OZON_API_KEY")
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -15,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'products',
 ]
 
 MIDDLEWARE = [
