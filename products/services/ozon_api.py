@@ -30,4 +30,4 @@ def fetch_ozon_products():
     except requests.exceptions.RequestException as err:
         return JsonResponse({"error": f"Request error occurred: {err}"}, status=500)
 
-    return JsonResponse(data)
+    return data
