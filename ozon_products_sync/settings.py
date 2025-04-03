@@ -12,7 +12,7 @@ env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 SECRET_KEY = env("SECRET_KEY")
-
+OZON_CLIENT_ID = env("CLIENT_ID")
 OZON_API_KEY = env("OZON_API_KEY")
 
 

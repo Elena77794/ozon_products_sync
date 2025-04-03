@@ -1,30 +1,8 @@
-from django.http import  JsonResponse
+from django.http import JsonResponse
 import requests
-from django.conf import settings
+from products.services.ozon_api import fetch_ozon_products
 
-token = settings.OZON_API_KEY
 
-def products_list(request):
-    url = "https://api-seller.ozon.ru/v3/product/list"
-    headers = {
-        "Client-Id": "1818",
-        "Api-Key": token,
-        "Content-Type": "application/json"
-
-    }
-
-    body = {
-        "filter": {
-            "visibility": "ALL"
-        },
-
-        "limit": 10
-    }
-    try:
-        response = requests.post(url, headers=headers, json=body)
-        response.raise_for_status()
-        data = response.json()
-    except requests.exceptions.RequestException as e:
-        return JsonResponse({"error": str(e)}, status=500)
-
-    return JsonResponse(data)
+def get_ozon_products(request):
+    data = fetch_ozon_products()
+    return data
